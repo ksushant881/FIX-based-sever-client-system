@@ -1,0 +1,61 @@
+<!-- config/FIX44.xml -->
+<?xml version="1.0" encoding="UTF-8"?>
+<fix major="4" minor="4">
+  <header>
+    <field name="BeginString" required="Y"/>
+    <field name="BodyLength" required="Y"/>
+    <field name="MsgType" required="Y"/>
+    <field name="SenderCompID" required="Y"/>
+    <field name="TargetCompID" required="Y"/>
+    <field name="MsgSeqNum" required="Y"/>
+    <field name="SendingTime" required="Y"/>
+  </header>
+  <messages>
+    <message name="NewOrderSingle" msgtype="D" msgcat="app">
+      <field name="ClOrdID" required="Y"/>
+      <field name="Side" required="Y"/>
+      <field name="TransactTime" required="Y"/>
+      <field name="OrdType" required="Y"/>
+      <field name="Symbol" required="Y"/>
+      <field name="Price" required="Y"/>
+      <field name="OrderQty" required="Y"/>
+    </message>
+    <message name="ExecutionReport" msgtype="8" msgcat="app">
+      <field name="ClOrdID" required="Y"/>
+      <field name="ExecID" required="Y"/>
+      <field name="ExecType" required="Y"/>
+      <field name="OrdStatus" required="Y"/>
+      <field name="Side" required="Y"/>
+      <field name="Symbol" required="Y"/>
+      <field name="Price" required="Y"/>
+      <field name="OrderQty" required="Y"/>
+    </message>
+    <message name="Reject" msgtype="3" msgcat="app">
+      <field name="RefSeqNum" required="Y"/>
+      <field name="Text" required="N"/>
+      <field name="RefTagID" required="N"/>
+    </message>
+    <message name="Heartbeat" msgtype="0" msgcat="admin"/>
+  </messages>
+  <fields>
+    <field number="11" name="ClOrdID" type="STRING"/>
+    <field number="32" name="OrderQty" type="QTY"/>
+    <field number="35" name="MsgType" type="STRING"/>
+    <field number="37" name="OrderID" type="STRING"/>
+    <field number="39" name="OrdStatus" type="CHAR">
+      <value enum="0" description="NEW"/>
+      <value enum="1" description="PARTIALLY_FILLED"/>
+      <value enum="2" description="FILLED"/>
+      <value enum="4" description="CANCELED"/>
+      <value enum="8" description="REJECTED"/>
+    </field>
+    <field number="44" name="Price" type="PRICE"/>
+    <field number="54" name="Side" type="CHAR">
+      <value enum="1" description="BUY"/>
+      <value enum="2" description="SELL"/>
+    </field>
+    <field number="55" name="Symbol" type="STRING"/>
+    <field number="58" name="Text" type="STRING"/>
+    <field number="150" name="ExecType" type="CHAR"/>
+  </fields>
+</fix>
